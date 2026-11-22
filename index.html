@@ -11,6 +11,12 @@
 <style>
 body{margin:0;background:#F6F4EF;color:#1A1A1A;font-family:'Commissioner',system-ui,sans-serif;}
 a{color:#1A1A1A}a:hover{color:#6B4E12}
+.hero{position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center}
+.hero-video{position:absolute;inset:0;pointer-events:none}
+.hero-video iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100vw,177.78vh);height:max(56.25vw,100vh);border:0}
+.hero-shade{position:absolute;inset:0;background:rgba(20,20,20,0.68)}
+.hero-content{position:relative;z-index:1;width:100%;box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){.hero-video{display:none}}
 @media (max-width:640px){h1{font-size:36px!important}h2{font-size:28px!important}}
 </style>
 </head>
@@ -24,8 +30,12 @@ a{color:#1A1A1A}a:hover{color:#6B4E12}
 </div>
 </header>
 
-<section style="background: #141414; color: #F6F4EF">
-<div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px 112px; display: flex; flex-direction: column; gap: 28px">
+<section class="hero" style="background: #141414; color: #F6F4EF">
+<div class="hero-video" aria-hidden="true">
+<iframe src="https://www.youtube-nocookie.com/embed/MzsdLNt8iwk?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=MzsdLNt8iwk&amp;controls=0&amp;playsinline=1&amp;modestbranding=1&amp;rel=0" title="Πλάνα από συνέδριο" tabindex="-1" allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+</div>
+<div class="hero-shade" aria-hidden="true"></div>
+<div class="hero-content" style="max-width: 1120px; margin: 0 auto; padding: 96px 24px 112px; display: flex; flex-direction: column; gap: 28px">
 <div style="width: 56px; height: 4px; background: #E8B04B; border-radius: 2px"></div>
 <h1 style="margin: 0; font-size: 56px; line-height: 1.1; font-weight: 700; max-width: 860px; color: #F6F4EF">Βίντεο από το φετινό συνέδριο, για να ανακοινώσετε το επόμενο</h1>
 <p style="margin: 0; font-size: 21px; line-height: 1.5; max-width: 640px; color: #D6D2C8">Κάλυψη ιατρικών συνεδρίων για εταιρείες οργάνωσης και επιστημονικούς φορείς.</p>
