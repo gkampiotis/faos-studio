@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Τεστ βίντεο</title>
+<style>
+body{margin:0;padding:16px;font:16px/1.5 system-ui,sans-serif;background:#fff;color:#111}
+video{width:100%;max-width:720px;background:#000;display:block}
+pre{white-space:pre-wrap;background:#f2f2f2;padding:12px;font-size:15px}
+</style>
+</head>
+<body>
+<h1 style="font-size:20px">Τεστ βίντεο</h1>
+<video id="v" src="hero.mp4?v=test" autoplay muted loop playsinline controls></video>
+<pre id="out">Φόρτωση…</pre>
+<script>
+var v=document.getElementById('v'),out=document.getElementById('out'),log=[];
+function add(m){log.push(new Date().toLocaleTimeString()+'  '+m);render();}
+function render(){
+  out.textContent=
+  'Παίζει: '+(!v.paused && v.currentTime>0 ? 'ΝΑΙ' : 'ΟΧΙ')+'\n'+
+  'Χρόνος βίντεο: '+v.currentTime.toFixed(1)+' δευτ.\n'+
+  'Κατάσταση φόρτωσης: '+v.readyState+' / 4\n'+
+  'Σφάλμα: '+(v.error ? 'κωδικός '+v.error.code+' '+(v.error.message||'') : 'κανένα')+'\n'+
+  'Υποστήριξη H.264: '+(v.canPlayType('video/mp4; codecs="avc1.640028"')||'όχι')+'\n'+
+  'Μείωση κίνησης ενεργή: '+(matchMedia('(prefers-reduced-motion: reduce)').matches ? 'ΝΑΙ' : 'όχι')+'\n'+
+  'Browser: '+navigator.userAgent+'\n\n'+log.join('\n');
+}
+['loadstart','loadedmetadata','canplay','playing','pause','stalled','waiting','error'].forEach(function(e){v.addEventListener(e,function(){add('συμβάν: '+e);});});
+var p=v.play(); if(p&&p.catch){p.then(function(){add('play(): ΟΚ');}).catch(function(e){add('play() απέτυχε: '+e.name+' '+e.message);});}
+setInterval(render,1000);
+</script>
+</body>
+</html>
